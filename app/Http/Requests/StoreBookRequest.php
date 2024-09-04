@@ -57,6 +57,7 @@ class StoreBookRequest extends FormRequest
         return [
             'title' => 'required|string|max:255|unique:books,title',
             'author' => 'required|string|max:255',
+            'publisher' => 'required|string|max:255',
             'published_date' => 'required|date',
             'genre' => 'required|string|in:' . implode(',', $genres),
         ];

@@ -57,6 +57,7 @@ class UpdateBookRequest extends FormRequest
         return [
             'title' => 'sometimes|string|max:255',
             'author' => 'sometimes|string|max:255',
+            'publisher' => 'sometimes|string|max:255',
             'published_date' => 'sometimes|date',
             'genre' => 'sometimes|string|in:' . implode(',', $genres),
         ];

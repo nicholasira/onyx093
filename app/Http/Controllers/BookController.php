@@ -64,7 +64,7 @@ class BookController extends Controller
     public function update(UpdateBookRequest $request, Book $book)
     {
         try {
-            $book = $book->update($request->validated());
+            $book->update($request->validated());
 
             return response()->json([
                 'status' => 'success',
