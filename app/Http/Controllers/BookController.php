@@ -18,6 +18,7 @@ class BookController extends Controller
         $books = Book::query()->paginate(10);
 
         return response()->json([
+            'status_code' => Response::HTTP_OK,
             'status' => 'success',
             'message' => 'Books retrieved successfully',
             'data' => $books,
@@ -33,12 +34,14 @@ class BookController extends Controller
             $book = Book::create($request->validated());
 
             return response()->json([
+                'status_code' => Response::HTTP_CREATED,
                 'status' => 'success',
                 'message' => 'Book created successfully',
                 'data' => $book,
             ], Response::HTTP_CREATED);
         } catch (Exception $e) {
             return response()->json([
+                'status_code' => Response::HTTP_INTERNAL_SERVER_ERROR,
                 'status' => 'error',
                 'message' => 'Book not created',
                 'data' => $e->getMessage(),
@@ -52,10 +55,11 @@ class BookController extends Controller
     public function show(Book $book)
     {
         return response()->json([
+            'status_code' => Response::HTTP_OK,
             'status' => 'success',
             'message' => 'Book retrieved successfully',
             'data' => $book,
-        ]);
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -67,12 +71,14 @@ class BookController extends Controller
             $book->update($request->validated());
 
             return response()->json([
+                'status_code' => Response::HTTP_OK,
                 'status' => 'success',
                 'message' => 'Book updated successfully',
                 'data' => $book,
             ], Response::HTTP_OK);
         } catch (Exception $e) {
             return response()->json([
+                'status_code' => Response::HTTP_INTERNAL_SERVER_ERROR,
                 'status' => 'error',
                 'message' => 'Book not updated',
                 'data' => $e->getMessage(),
@@ -89,11 +95,13 @@ class BookController extends Controller
             $book->delete();
 
             return response()->json([
+                'status_code' => Response::HTTP_NO_CONTENT,
                 'status' => 'success',
                 'message' => 'Book deleted successfully',
             ], Response::HTTP_NO_CONTENT);
         } catch (Exception $e) {
             return response()->json([
+                'status_code' => Response::HTTP_INTERNAL_SERVER_ERROR,
                 'status' => 'error',
                 'message' => 'Book not deleted',
                 'data' => $e->getMessage(),
